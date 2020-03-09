@@ -1,0 +1,9 @@
+img.campground-img {
+    margin: 25px;
+    width: 100%;
+}
+
+.login-form, .signup-form {
+    max-width: 500px;
+    margin-top: 25px;
+}
