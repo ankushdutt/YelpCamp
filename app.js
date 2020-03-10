@@ -4,19 +4,21 @@ var express     = require("express")
     mongoose    = require("mongoose")
     passport    = require("passport")
     LclStrategy = require("passport-local")
+    mthdOveride = require("method-override")
+    flash       = require("connect-flash")
     Campground  = require("./models/campground")
     Comment     = require("./models/comment")
     User        = require("./models/user")
-    mthdOveride = require("method-override")
-    flash       = require("connect-flash")
+    keys        = require('./config')
 
 var commentRoutes = require("./routes/comments")
 var campgroundRoutes = require("./routes/campgrounds")
 var indexRoutes = require("./routes/index")
 
-mongoose.connect("mongodb://localhost/database", {useNewUrlParser: true,  useUnifiedTopology: true}, function() {
+mongoose.connect(keys.mongoUrl, {useNewUrlParser: true,  useUnifiedTopology: true}, function() {
     console.log("MongoDB Connected")
 });
+
 app.set("view engine", "ejs")
 app.use(express.static(__dirname + "/public"))
 app.use(bodyParser.urlencoded({extended: true})) //used to support body parser which helps in transforming data from form to req.body 
@@ -49,6 +51,6 @@ app.use("/campgrounds/:id/comments", commentRoutes)
 app.use("/campgrounds", campgroundRoutes)
 
 //-------------LISTEN ON PORT 5000--------------
-app.listen(5000, function() {
+app.listen(process.env.PORT || 5000, function() {
     console.log("server is running at http://localhost:5000")
 })
