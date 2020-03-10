@@ -9,7 +9,6 @@ var express     = require("express")
     Campground  = require("./models/campground")
     Comment     = require("./models/comment")
     User        = require("./models/user")
-    keys        = require('./config')
 
 var commentRoutes = require("./routes/comments")
 var campgroundRoutes = require("./routes/campgrounds")
